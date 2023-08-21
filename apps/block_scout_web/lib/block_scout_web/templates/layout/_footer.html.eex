@@ -1,0 +1,71 @@
+<footer class="footer">
+  <div class="footer-body container">
+    <!-- Logo -->
+    <div class="row footer-logo-row">
+      <div class="col-md-12">
+        <%= link to: webapp_url(@conn), class: "footer-brand" do %>
+          <%= if logo_footer() do %>
+            <img class="footer-logo" src="<%= static_path(@conn, logo_footer()) %>" alt="<%= subnetwork_title() %>" />
+          <% end %>
+          <%= if logo_text() do %>
+            <span class="logo-text in-footer <%= unless logo_footer(), do: "no-logo" %>"> <%= logo_text() %> </span>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <% other_explorers = other_explorers() %>
+    <% col_size = if Enum.empty?(other_explorers), do: 3, else: 2 %>
+
+    <div class="row">
+      <div class="col-xs-12 col-lg-3">
+        <p class="footer-info-text"><%= gettext("Monoscan.net is a tool for inspecting and analyzing MonoMoney EVM based blockchain.") %></p>
+        <div class="footer-social-icons">
+          <a href="<%= Application.get_env(:block_scout_web, :footer)[:github_link] %>" rel="noreferrer" target="_blank" class="footer-social-icon" title='<%= gettext("Github") %>'>
+            <div class="footer-social-icon-container fontawesome-icon github"></div>
+          </a>
+          <a href="https://twitter.com/monomoney_au" rel="noreferrer" target="_blank" class="footer-social-icon" title='<%= gettext("Twitter") %>'>
+            <div class="footer-social-icon-container fontawesome-icon twitter"></div>
+          </a>
+          <%= if Application.get_env(:block_scout_web, :footer)[:telegram_link_enabled] && Application.get_env(:block_scout_web, :footer)[:telegram_link] do %>
+            <a href="<%= Application.get_env(:block_scout_web, :footer)[:telegram_link] %>" rel="noreferrer" target="_blank" class="footer-social-icon" title='<%= gettext("Telegram") %>'>
+              <div class="footer-social-icon-container fontawesome-icon telegram"></div>
+            </a>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-md-4 col-lg-<%= col_size %> footer-list">
+        <h3>Explorer</h3>
+        <ul>
+          <li><a href="<%= issue_link(@conn) %>" rel="noreferrer" class="footer-link" target="_blank"><%= gettext("Submit an Issue") %></a></li>
+          <li><a href="<%= Application.get_env(:block_scout_web, :footer)[:github_link] %>" rel="noreferrer" class="footer-link"><%= gettext("Contribute") %></a></li>
+          <li><a href="<%= Application.get_env(:block_scout_web, :footer)[:chat_link] %>" rel="noreferrer" class="footer-link"><%= gettext("Chat (#MonoMoney)") %></a></li>
+          <%= if Application.get_env(:block_scout_web, :footer)[:forum_link_enabled] && Application.get_env(:block_scout_web, :footer)[:forum_link] do %>
+            <li><a href="<%= Application.get_env(:block_scout_web, :footer)[:forum_link] %>" rel="noreferrer" class="footer-link"><%= gettext("Forum") %></a></li>
+          <% end %>
+          <%= render BlockScoutWeb.LayoutView, "_add_chain_to_mm.html" %>
+        </ul>
+      </div>
+      
+       <div class="col-xs-12 col-md-4 col-lg-<%= col_size %> footer-list">
+        <h3>Links</h3>
+        <ul>
+          <li><a href="https://www.monomoney.net" rel="noreferrer" class="footer-link" target="_blank">Monomoney Website</a></li>
+          <li><a href="https://testnet.monoscan.net" rel="noreferrer" class="footer-link" target="_blank">Testnet Explorer</a></li>
+          <li><a href="https://docs.monomoney.net/for-developers/deploy-and-verify" rel="noreferrer" class="footer-link" target="_blank">Deploy & Verify</a></li>
+        </ul>
+      </div>
+
+      <div class="col-xs-12 col-md-4 col-lg-<%= col_size %> footer-list">
+        <h3>Market</h3>
+        <ul>
+          <li><a href="https://coinmarketcap.com/currencies/monomoney/" rel="noreferrer" class="footer-link" target="_blank">Coinmarketcap.com</a></li>
+          <li><a href="https://www.coingecko.com/en/coins/monomoney" rel="noreferrer" class="footer-link" target="_blank">Coingecko.com</a></li>
+          <li><a href="https://monoswap.net" rel="noreferrer" class="footer-link" target="_blank">Monoswap.net</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</footer>
